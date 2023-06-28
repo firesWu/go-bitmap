@@ -8,6 +8,7 @@ type BitmapInterface interface {
 	Set(uint)
 	UnSet(uint)
 	FillOnes()
+	Clear()
 	RunIterator(uint, func(uint))
 }
 
@@ -53,6 +54,12 @@ func (b Bitmap) UnSet(i uint) {
 func (b Bitmap) FillOnes() {
 	for i := 0; i < len(b); i++ {
 		b[i] = maxUint32
+	}
+}
+
+func (b Bitmap) Clear() {
+	for i := 0; i < len(b); i++ {
+		b[i] = 0
 	}
 }
 

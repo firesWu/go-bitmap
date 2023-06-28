@@ -43,11 +43,16 @@ func (c ConcurrentBitmap) FillOnes() {
 	c.Bitmap.FillOnes()
 }
 
+func (c ConcurrentBitmap) Clear() {
+	c.Lock()
+	defer c.Unlock()
+	c.Bitmap.Clear()
+}
+
 func (c ConcurrentBitmap) RunIterator(u uint, f func(uint)) {
 	c.RLock()
 	defer c.RUnlock()
 	c.Bitmap.RunIterator(u, f)
 }
-
 
 var _ BitmapInterface = new(ConcurrentBitmap)
