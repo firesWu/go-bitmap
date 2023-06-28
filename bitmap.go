@@ -2,6 +2,15 @@ package bitmap
 
 import "math"
 
+type BitmapInterface interface {
+	Len() int
+	Contain(uint) bool
+	Set(uint)
+	UnSet(uint)
+	FillOnes()
+	RunIterator(uint, func(uint))
+}
+
 type Bitmap []uint32
 
 var bitLen = uint(32)
@@ -55,3 +64,5 @@ func (b Bitmap) RunIterator(start uint, f func(uint)) {
 		}
 	}
 }
+
+var _ BitmapInterface = new(Bitmap)
